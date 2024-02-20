@@ -20,5 +20,5 @@ from libraryApp.views import home #imports home view from libraryApp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('home/', home, name='home'),
+     path('', home, name='home'),
 ]
