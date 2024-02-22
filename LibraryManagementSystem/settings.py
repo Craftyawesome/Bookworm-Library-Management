@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #Manually added apps
     'libraryApp',
+    'accounts',
 ]
 
 MIDDLEWARE = [

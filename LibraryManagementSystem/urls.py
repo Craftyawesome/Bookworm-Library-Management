@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from libraryApp.views import home #imports home view from libraryApp
+from django.contrib import admin
+from django.urls import include, path
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', home, name='home'),
+    path('', home, name='home'),
+    path("account/", include("accounts.urls")),
+    path("account/", include("django.contrib.auth.urls")),
 ]
