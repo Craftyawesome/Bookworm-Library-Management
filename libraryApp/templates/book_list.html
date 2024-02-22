@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book List</h1>
+
+    <!-- Search form -->
+    <form  method="GET">
+        <label for="search_query">Search:</label>
+        <input type="text" id="search_query" name="q" value="{{ query }}" placeholder="Enter your search query">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Display search results or all books -->
+    {% if query %}
+        <p>Search results for: "{{ query }}"</p>
+        <ul>
+            <!-- Loops thru books and displays by book.title and book.author_name -->
+            {% for book in books %}
+                <li>{{ book.title }} by {{ book.author_name }}</li>
+            {% endfor %}
+        </ul>
+    <!-- If nothing is searched shows all books by title and author_name -->
+    {% else %}
+        <p>All Books:</p>
+        <ul>
+            {% for book in books %}
+                <li>{{ book.title }} by {{ book.author_name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

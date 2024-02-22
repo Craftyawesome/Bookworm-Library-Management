@@ -12,9 +12,9 @@
         
     }
 
-    h1 {
-        color: #007BFF; 
-        background-color: beige;
+    header {
+        color: black; 
+        background-color: rgb(255, 255, 255);
         margin: auto;
         border: 10px solid black;
         padding: 20px;
@@ -23,10 +23,26 @@
         width:100%; /* keeps page scaled no matter page size*/
 
     }
+    h1{
+        text-decoration: underline;
+    }
+    h2{
+        text-align: right;
+    }
+
+    h2 a{
+        color: rgb(5, 5, 5);
+        text-decoration: none;
+    }
+
+    h2 a:hover{
+        text-decoration: underline;
+    }
 
     p{
         text-align: center;
         margin-top: 20px;
+        color: blue;
     }
 
 </style>
@@ -38,9 +54,18 @@
     <title>Library Management System</title>
 
 </head>
-<body>
-    <h1>Welcome to BookWorm</h1>
+<header>
+    <h1>Welcome to Bookworm</h1>
     <p>Explore our collection of books and explore our resources</p>
+    <h2>
+        <a href="{% url 'book_list' %}">View Books</a>
+        <a>|</a>
+        <a href="#">Sign Up</a>
+    </h2>
+</header>
+<body>
+    
+    
    
 </body>
 </html>
