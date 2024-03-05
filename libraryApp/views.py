@@ -4,11 +4,22 @@ from .models import Book
 
 # HomeScreenView
 def home(request):
-    return render(request, 'home.html')
+    genres = Book.GENRE_CHOICES
 
+    grouped_books = {}
+    for genre, _ in genres:
+        books = Book.objects.filter(genre=genre)
+        grouped_books[genre] = books
+
+    context = {
+        'grouped_books': grouped_books,
+    }
+
+    return render(request, 'home.html', context)
 
 def book_list(request):
-    query = request.GET.get('q', '')  # Get the search query from the URL parameter 'q'
+    # Get the search query from the URL parameter 'q'
+    query = request.GET.get('q', '')
 
     if query:
         # Perform a case-insensitive search on title and author fields

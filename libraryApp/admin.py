@@ -9,4 +9,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display =  ['id', 'name', 'phone_number', 'is_admin']
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'author_name', 'isbn', 'rent_flag']
+    list_display = ['id', 'title', 'author_name', 'isbn', 'rent_flag', 'genre']
