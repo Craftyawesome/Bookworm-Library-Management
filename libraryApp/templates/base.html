@@ -49,11 +49,19 @@
     <h1>Bookworm</h1>
     <p>Explore our Book selection</p>
     <h2>
-        <a href="{% url 'home' %}">Home</a>
-        <a>|</a>
         <a href="{% url 'book_list' %}">View Books</a>
         <a>|</a>
-        <a href="#">Sign Up</a>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">logout</button>
+            </form>
+
+        {% else %}
+            <a href="{% url 'signup' %}">Sign Up</a>
+            <a>|</a>
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     </h2>
 </header>
 
