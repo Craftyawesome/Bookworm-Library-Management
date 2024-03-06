@@ -89,7 +89,11 @@
 </head>
 <header>
     <h1>Welcome to Bookworm</h1>
-    <p>Explore our collection of books! Sign up and create an account for more advanced features</p>
+    <p>Explore our collection of books!
+        {% if not user.is_authenticated %}
+            Sign up and create an account for more advanced features.
+        {% endif %}
+    </p>
     <h2>
         <a href="{% url 'book_list' %}">View Books</a>
         <a>|</a>
@@ -124,14 +128,7 @@
 
         
     {% endfor %}
-    {% if user.is_authenticated %}
-        <a>Welcome!</a>
-    {% else %}
-        <p1>Sign up for more features</p1>
-    {% endif %}
-        
     {% endblock %}
-   
 </body>
 
 <footer>
