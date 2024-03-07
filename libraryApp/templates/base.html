@@ -2,6 +2,16 @@
 <html lang="en">
 
 <style>
+    body {
+        background-color: #d8d8d8;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        padding: 0;
+        margin: auto;
+        box-sizing: border-box;
+        max-width: 1100px;
+        width:100%
+    }
 
     header {
         color: black; 
@@ -50,6 +60,8 @@
     <h1>Bookworm</h1>
     <p>Explore our Book selection</p>
     <h2>
+        <a href="{% url 'home' %}">Home</a>
+        <a>|</a>
         <a href="{% url 'book_list' %}">View Books</a>
         <a>|</a>
         {% if user.is_authenticated %}
