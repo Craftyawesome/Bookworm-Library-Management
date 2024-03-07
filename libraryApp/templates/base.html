@@ -53,6 +53,13 @@
         margin-bottom: 0px, bottom;
         width: 100%;
     }
+    .link-button {
+        all: inherit;
+    }
+    .link-button:hover {
+        text-decoration: underline;
+    }
+
 </style>
 
 
@@ -65,9 +72,9 @@
         <a href="{% url 'book_list' %}">View Books</a>
         <a>|</a>
         {% if user.is_authenticated %}
-            <form method="post" action="{% url 'logout' %}">
+            <form method="post" style="display: inline-block;" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button type="submit">logout</button>
+                <button type="submit" class="link-button">Logout</button>
             </form>
 
         {% else %}
