@@ -14,16 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
-from libraryApp.views import home #imports home view from libraryApp
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('libraryApp.urls')),
     path("account/", include("accounts.urls")),
     path("account/", include("django.contrib.auth.urls")),
-]
+    path("print/", include("printRequest.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

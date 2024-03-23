@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<h1>Requested prints:</h1>
+<ul>
+  {% for post in object_list %}
+    <li style="margin-bottom: 20px;">
+      <h3>{{ post.cover }}</h3>
+      <p style="margin: 0;">Requested by {{ post.user }} on {{ post.uploaded_at }}</p>
+      <a href="{{ post.cover.url }}" download>Download</a>
+      <button onclick="deleteDocument({{ post.pk }})">Delete</button>
+    </li>
+  {% endfor %}
+</ul>
+</body>
+
+<script>
+async function deleteDocument(pk) {
+    if (!confirm("Are you sure you want to delete this document?")) return;
+    try {
+        const response = await fetch(`/print/${pk}/delete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+        });
+        const data = await response.json();
+        if (data.success) {
+            const liElement = document.querySelector(`li:has(button[onclick="deleteDocument(${pk})"])`);
+            liElement.remove();
+        } else {
+            alert('Failed to delete');
+        }
+    } catch (error) {
+        alert('error');
+    }
+}
+</script>
+
+{% endblock %}
