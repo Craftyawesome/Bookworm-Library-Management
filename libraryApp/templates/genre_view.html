@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<head>
+    <title>Book Request Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+
+</head>
+
+<h1>List of Book Requests </h1>
+
+<ul id="display">
+
+</ul>
+
+<script>
+$(document).ready(function(){
+
+    setInterval(function(){
+        $.ajax({
+            type: 'GET',
+            url : "{% url 'getBook_Request' %}",
+            success: function(response){
+                //console.log(response);
+                $("#display").empty();
+                for(var key in response.requests)
+                {
+                    var temp="<li>"+response.requests[key].book_title+ " by " +response.requests[key].book_author+"</li>";
+                    $("#display").append(temp);
+                }
+            },
+            error: function(response){
+                alert("An Error Happened")
+            }
+        })
+    },1000)
+
+});
+</script>
+{% endblock %}

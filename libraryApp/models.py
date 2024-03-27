@@ -23,3 +23,10 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+class Book_Request(models.Model):
+    username    = models.CharField(max_length=70)
+    email       = models.CharField(max_length=70)
+    book_title  = models.CharField(max_length=70)
+    book_author = models.CharField(max_length=70)
+    
