@@ -32,11 +32,13 @@
 
 <body>
     {% block content %}
-
+    <a href="genre_view">View Live Book Requests</a>
+    <a>|</a>
+    <a href="#">Book Request Form</a>
     <p>Books by Category </p>
 
     {% for genre, books in grouped_books.items %}
-        <div class="genre-row">
+        <div class="genre-row" id="{{ genre_id }}">
             <h3 class="genre-name">{{ genre }}</h3>
             <ul class="book-list">
                 {% for book in books %}
@@ -47,6 +49,8 @@
 
         
     {% endfor %}
+    
+    
     {% endblock %}
 </body>
 

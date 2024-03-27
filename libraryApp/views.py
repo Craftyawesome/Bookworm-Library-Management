@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Book
+from .models import Book, Book_Request
+from django.http import JsonResponse
 # Create your views here.
 
 # HomeScreenView
@@ -30,3 +31,11 @@ def book_list(request):
 
     return render(request, 'book_list.html', {'books': books, 'query': query})
 
+def genre_view(request):
+
+        return render(request, 'genre_view.html')
+
+def getBook_Request(request):
+    requests = Book_Request.objects.all()
+            
+    return JsonResponse({"requests":list(requests.values())})
