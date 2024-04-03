@@ -24,7 +24,7 @@ def book_list(request):
 
     if query:
         # Perform a case-insensitive search on title and author fields
-        books = Book.objects.filter(title__icontains=query) | Book.objects.filter(author_name__icontains=query)
+        books = Book.objects.filter(title__icontains=query) | Book.objects.filter(author_name__icontains=query) | Book.objects.filter(isbn__icontains=query)
     else:
         # If no query, return all books
         books = Book.objects.all()
