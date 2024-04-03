@@ -67,19 +67,15 @@
 
 <header class="header">
     <h1>Bookworm</h1>
-    <p>Explore our Book selection</p>
+    <p>Welcome to Bookworm, Check out available books. Dont see one you want to read request a book. Upload a file to be printed. </p>
     <h2>
         <a href="{% url 'home' %}">Home</a>
         <a>|</a>
-        <a href="{% url 'book_list' %}">View Books</a>
+        <a href="{% url 'book_list' %}">Search Books</a>
         <a>|</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'print_request' %}">Request Printout</a>
+            <a href="#">Check-Out</a>
             <a>|</a>
-            {% if user.is_staff %}
-                <a href="{% url 'print_list' %}">View Requested Prints</a>
-                <a>|</a>
-            {% endif %}
             <form method="post" style="display: inline-block;" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="link-button">Logout</button>

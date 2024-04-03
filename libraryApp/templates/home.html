@@ -18,6 +18,16 @@
     .book-list li {
     margin-bottom: 5px;
     }
+
+    div1, div2{
+        background-color: white;
+        border: 5px solid black;
+        float: right;
+        margin-top: 10px;
+        padding: 20px;
+        display: block;
+    }
+
 </style>
 
 {% extends 'base.html' %}
@@ -32,9 +42,22 @@
 
 <body>
     {% block content %}
-    <a href="genre_view">View Live Book Requests</a>
-    <a>|</a>
-    <a href="#">Book Request Form</a>
+    <div1>
+        <p>Book Requests:</p>        
+        <a href="genre_view">View Requested Book-List</a>
+        <a>|</a>
+        <a href="#">Request a New Book</a>
+
+        <p>Print Requests:</p>        
+        <a href="{% url 'print_request' %}">Request Printout</a>
+        <a>|</a>
+        {% if user.is_staff %}
+            <a href="{% url 'print_list' %}">View Requested Prints</a>
+            <a>|</a>
+        {% endif %}
+        
+    </div1>
+
     <p>Books by Category </p>
 
     {% for genre, books in grouped_books.items %}
