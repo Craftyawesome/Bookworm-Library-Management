@@ -1,37 +1,53 @@
-<!DOCTYPE html>
-<html>
-   
 {% extends 'base.html' %}
-    
+
 {% block content %}
-<body>
     <h1>Book List</h1>
     <!-- Search form -->
-    <form  method="GET">
+    <form method="GET">
         <label for="search_query">Search:</label>
-        <input type="text" id="search_query" name="q" value="{{ query }}" placeholder="Book Title, Auther or ISNB">
+        <input type="text" id="search_query" name="q" value="{{ query }}" placeholder="Book Title, Author, or ISBN">
         <button type="submit">Search</button>
     </form>
 
     <!-- Display search results or all books -->
     {% if query %}
         <p>Search results for: "{{ query }}"</p>
-        <ul>
-            <!-- Loops thru books and displays by book.title and book.author_name -->
-            {% for book in books %}
-                <li>{{ book.title }} by {{ book.author_name }}</li>
-            {% endfor %}
-        </ul>
-    <!-- If nothing is searched shows all books by title and author_name -->
     {% else %}
-        <p2>All Books:</p2>
-        <ul>
-            {% for book in books %}
-                <li>{{ book.title }} by {{ book.author_name }}</li>
-            {% endfor %}
-        </ul>
+        <p>All Books:</p>
     {% endif %}
-
-</body>
+    
+    <ul>
+        <!-- Loop through books and display each book's title and author -->
+        {% for book in books %}
+            <li>
+                <a class="book-link" href="{% url 'book_detail' book.id %}">{{ book.title }} by {{ book.author_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
-</html>
+
+{% block extrastyle %}
+<style>
+    /* Define styles for unvisited links */
+    .book-link:link {
+        color: blue; /* Set the color of unvisited links */
+        text-decoration: none; /* Remove underline */
+    }
+
+    /* Define styles for visited links */
+    .book-link:visited {
+        color: blue; /* Set the color of visited links */
+        text-decoration: none; /* Remove underline */
+    }
+
+    /* Define styles for mouse-hovered links */
+    .book-link:hover {
+        color: red; /* Change color when hovered */
+    }
+
+    /* Define styles for active links */
+    .book-link:active {
+        color: green; /* Change color when clicked */
+    }
+</style>
+{% endblock %}

@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from .models import Book, Book_Request
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Book, Book_Request #Rental
 from django.http import JsonResponse
+from django.utils import timezone
+from datetime import timedelta
 # Create your views here.
 
 # HomeScreenView
@@ -35,7 +37,34 @@ def genre_view(request):
 
         return render(request, 'genre_view.html')
 
+def book_detail(request, book_id):
+    # Retrieve the book object using its ID
+    book = get_object_or_404(Book, id=book_id)
+    
+    # Define the fields you want to display
+    book_details = {
+        'Title': book.title,
+        'Author': book.author_name,
+        'ISBN': book.isbn,
+        'Genre': book.genre,
+        'Price': book.price,
+        'Rentable': book.rent_flag,
+    }
+    
+    # Render the book detail template with the book details
+    return render(request, 'book_detail.html', {'book_details': book_details})
+
 def getBook_Request(request):
     requests = Book_Request.objects.all()
             
     return JsonResponse({"requests":list(requests.values())})
+
+
+#def rent_book(request, book_id):
+#    book = Book.objects.get(pk=book_id)
+#   due_date = timezone.now() + timedelta(weeks=1)
+#    rental = Rental(book=book, rented_by=request.user.username, due_date=due_date)
+#    rental.save()
+#    book.available = False
+#    book.save()
+#    return redirect('book_detail', book_id=book_id)
