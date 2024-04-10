@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'libraryApp',
     'accounts',
     'printRequest',
+    'checkout',
+    
 ]
 
 MIDDLEWARE = [
