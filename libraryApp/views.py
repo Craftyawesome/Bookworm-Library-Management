@@ -22,11 +22,13 @@ def home(request):
 
 def book_list(request):
     # Get the search query from the URL parameter 'q'
-    query = request.GET.get('q', '')
+    query = request.GET.get('q', '').strip()
 
     if query:
         # Perform a case-insensitive search on title and author fields
-        books = Book.objects.filter(title__icontains=query) | Book.objects.filter(author_name__icontains=query) | Book.objects.filter(isbn__icontains=query)
+        books = Book.objects.filter(title__icontains=query) | \
+                Book.objects.filter(author_name__icontains=query) | \
+                Book.objects.filter(isbn__exact=query)
     else:
         # If no query, return all books
         books = Book.objects.all()
