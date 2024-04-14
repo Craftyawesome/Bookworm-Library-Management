@@ -8,16 +8,11 @@ from .forms import DocumentForm
 import os
 
 
-class HomePageView(ListView):
+class HomePageView(LoginRequiredMixin, CreateView, ListView):
     model = Document
     template_name = "print_list.html"
-
-
-class CreatePostView(LoginRequiredMixin, CreateView):
-    model = Document
     form_class = DocumentForm
-    template_name = "print_request.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("print")
 
     def form_valid(self, form):
         form.instance.user = self.request.user

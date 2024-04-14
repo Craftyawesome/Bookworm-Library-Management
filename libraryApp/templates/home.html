@@ -47,14 +47,6 @@
         <a href="genre_view">View Requested Book-List</a>
         <a>|</a>
         <a href="#">Book Details</a>
-        {% if user.is_authenticated %}
-        <p>Print Requests:</p>        
-        <a href="{% url 'print_request' %}">Request Printout</a>
-        {% if user.is_staff %}
-            <a>|</a>
-            <a href="{% url 'print_list' %}">View Requested Prints</a>
-        {% endif %}
-        {% endif %}
 
     </div1>
 
