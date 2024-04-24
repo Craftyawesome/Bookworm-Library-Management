@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <form action="#" method="post">
   {% csrf_token %}
   <label for="username">Username:</label>
@@ -13,8 +16,6 @@
   <input type="text" id="book_author" name="book_author" required><br><br>
   
   <button type="submit">Submit Request</button>
-<<<<<<< Updated upstream
 </form>
-=======
-</form>
->>>>>>> Stashed changes
+
+{% endblock %}
