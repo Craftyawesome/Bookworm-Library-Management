@@ -59,6 +59,9 @@ def getBook_Request(request):
             
     return JsonResponse({"requests":list(requests.values())})
 
+def book_club(request):
+    return render(request,'book_club.html')
+
 
 #def rent_book(request, book_id):
 #    book = Book.objects.get(pk=book_id)
