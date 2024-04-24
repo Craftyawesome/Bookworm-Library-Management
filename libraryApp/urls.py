@@ -1,9 +1,7 @@
 from django.urls import path 
-<<<<<<< Updated upstream
-from .views import home, book_list, genre_view, getBook_Request, book_detail, book_club
-=======
-from .views import home, book_list, genre_view, getBook_Request, book_detail, add_to_cart, request_book, book_request
->>>>>>> Stashed changes
+
+from .views import home, book_list, genre_view, getBook_Request, book_detail, add_to_cart, request_book, book_request,book_club
+
 from django.contrib.auth import views as auth_views
 from . import views
 
