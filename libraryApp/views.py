@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Book, Book_Request #Rental
+from .models import Book, Book_Request, CartItem
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import timedelta
@@ -49,7 +49,6 @@ def book_detail(request, book_id):
         'Author': book.author_name,
         'ISBN': book.isbn,
         'Genre': book.genre,
-        'Price': book.price,
         'Rentable': book.rent_flag,
     }
     
@@ -61,12 +60,24 @@ def getBook_Request(request):
             
     return JsonResponse({"requests":list(requests.values())})
 
+def book_club(request):
+    return render(request,'book_club.html')
 
-#def rent_book(request, book_id):
-#    book = Book.objects.get(pk=book_id)
-#   due_date = timezone.now() + timedelta(weeks=1)
-#    rental = Rental(book=book, rented_by=request.user.username, due_date=due_date)
-#    rental.save()
-#    book.available = False
-#    book.save()
-#    return redirect('book_detail', book_id=book_id)
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        book_isbn = request.POST.get('book_isbn')
+        book = get_object_or_404(Book, isbn=book_isbn)
+
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        # Create a new CartItem for the selected book and add it to the cart
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
+
+        return redirect('home') #redirct to home page after adding to cart
+    return redirect ('book_list') # redirct to book list if not a post request
+
+def request_book(request):
+    return render(request,'request_book.html')
+
+def book_request(request):
+    return render(request,'book_request.html')
