@@ -2,6 +2,16 @@
 
 {% block content %}
 <body>
+
+<h1>Request a print</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+<p></p>
+
+{% if user.is_staff %}
 <h1>Requested prints:</h1>
 <ul>
   {% for post in object_list %}
@@ -37,5 +47,5 @@ async function deleteDocument(pk) {
     }
 }
 </script>
-
+{% endif %}
 {% endblock %}

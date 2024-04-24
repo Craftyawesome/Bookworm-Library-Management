@@ -74,6 +74,8 @@
         <a href="{% url 'book_list' %}">Search Books</a>
         <a>|</a>
         {% if user.is_authenticated %}
+            <a href="{% url 'print' %}">Print Requests</a>
+            <a>|</a>
             <a href="#">Check-Out</a>
             <a>|</a>
             <form method="post" style="display: inline-block;" action="{% url 'logout' %}">

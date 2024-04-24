@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+   
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <title>Book Detail</title>
+</head>
+<body>
+    <h1>Book Detail</h1>
+    <ul>
+        {% for key, value in book_details.items %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+
+
+
+</body>
+{% endblock %}
+</html>

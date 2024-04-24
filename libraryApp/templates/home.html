@@ -46,20 +46,12 @@
         <p>Book Requests:</p>        
         <a href="genre_view">View Requested Book-List</a>
         <a>|</a>
-        <a href="#">Request a New Book</a>
+        <a href="#">Book Details</a>
 
-        <p>Print Requests:</p>        
-        <a href="{% url 'print_request' %}">Request Printout</a>
-        <a>|</a>
-        {% if user.is_staff %}
-            <a href="{% url 'print_list' %}">View Requested Prints</a>
-            <a>|</a>
-        {% endif %}
-        
     </div1>
 
     <p>Books by Category </p>
-
+    <!-- Original-->
     {% for genre, books in grouped_books.items %}
         <div class="genre-row" id="{{ genre_id }}">
             <h3 class="genre-name">{{ genre }}</h3>
@@ -69,7 +61,9 @@
                 {% endfor %}
             </ul>
         </div>
+    
 
+    
         
     {% endfor %}
     
