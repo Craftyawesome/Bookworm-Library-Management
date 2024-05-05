@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.conf import settings
 
 
 # Create your models here.
@@ -34,6 +34,6 @@ class Book_Request(models.Model):
     book_author = models.CharField(max_length=70)
 
 class CartItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
     

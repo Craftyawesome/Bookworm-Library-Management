@@ -68,10 +68,8 @@ def add_to_cart(request):
     if request.method == 'POST':
         book_isbn = request.POST.get('book_isbn')
         book = get_object_or_404(Book, isbn=book_isbn)
-
-        cart, created = Cart.objects.get_or_create(user=request.user)
         # Create a new CartItem for the selected book and add it to the cart
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, book=book)
+        cart_item, created = CartItem.objects.get_or_create(user=request.user, book=book)
 
         return redirect('home') #redirct to home page after adding to cart
     return redirect ('book_list') # redirct to book list if not a post request
