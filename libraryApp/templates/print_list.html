@@ -11,16 +11,18 @@
 </form>
 <p></p>
 
-{% if user.is_staff %}
+
 <h1>Requested prints:</h1>
 <ul>
   {% for post in object_list %}
+    {% if request.user == post.user or user.is_staff%}
     <li style="margin-bottom: 20px;">
       <h3>{{ post.cover }}</h3>
       <p style="margin: 0;">Requested by {{ post.user }} on {{ post.uploaded_at }}</p>
       <a href="{{ post.cover.url }}" download>Download</a>
       <button onclick="deleteDocument({{ post.pk }})">Delete</button>
     </li>
+    {% endif %}
   {% endfor %}
 </ul>
 </body>
@@ -47,5 +49,4 @@ async function deleteDocument(pk) {
     }
 }
 </script>
-{% endif %}
 {% endblock %}

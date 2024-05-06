@@ -4,15 +4,16 @@
 <body>
 
 
-{% if user.is_staff %}
 <h1>Requested books:</h1>
 <ul>
   {% for post in object_list %}
-    <li style="margin-bottom: 20px;">
-      <h3>{{ post.book }}</h3>
-      <p style="margin: 0;">Requested by {{ post.user }}</p>
-      <button onclick="deleteDocument({{ post.pk }})">Delete</button>
-    </li>
+    {% if request.user == post.user or user.is_staff%}
+      <li style="margin-bottom: 20px;">
+        <h3>{{ post.book }}</h3>
+        <p style="margin: 0;">Requested by {{ post.user }}</p>
+        <button onclick="deleteDocument({{ post.pk }})">Delete</button>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>
 </body>
@@ -39,5 +40,4 @@ async function deleteDocument(pk) {
     }
 }
 </script>
-{% endif %}
 {% endblock %}
