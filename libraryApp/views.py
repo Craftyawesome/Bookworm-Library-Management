@@ -6,7 +6,7 @@ from datetime import timedelta
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .forms import DocumentForm
+from .forms import DocumentForm, BookRequest
 import os
 from django.views.decorators.http import require_POST
 # Create your views here.
@@ -41,9 +41,9 @@ def book_list(request):
 
     return render(request, 'book_list.html', {'books': books, 'query': query})
 
-def genre_view(request):
+def requested_books(request):
 
-        return render(request, 'genre_view.html')
+        return render(request, 'requested_books.html')
 
 def book_detail(request, book_id):
     # Retrieve the book object using its ID
@@ -76,11 +76,15 @@ def add_to_cart(request):
         return redirect('home') #redirct to home page after adding to cart
     return redirect ('book_list') # redirct to book list if not a post request
 
-def request_book(request):
-    return render(request,'request_book.html')
+class request_book(LoginRequiredMixin, CreateView):
+    model = Book_Request
+    form_class = BookRequest
+    template_name = "request_book.html"
+    success_url = reverse_lazy("requested_books")
 
-def book_request(request):
-    return render(request,'book_request.html')
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class BookCheckoutView(LoginRequiredMixin, CreateView, ListView):
     model = CartItem

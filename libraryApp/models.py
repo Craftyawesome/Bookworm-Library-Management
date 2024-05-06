@@ -28,8 +28,7 @@ class Book(models.Model):
 
 
 class Book_Request(models.Model):
-    username = models.CharField(max_length=70)
-    email = models.CharField(max_length=70)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     book_title = models.CharField(max_length=70)
     book_author = models.CharField(max_length=70)
 
