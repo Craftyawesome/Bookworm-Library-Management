@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+
+
+{% if user.is_staff %}
+<h1>Requested books:</h1>
+<ul>
+  {% for post in object_list %}
+    <li style="margin-bottom: 20px;">
+      <h3>{{ post.book }}</h3>
+      <p style="margin: 0;">Requested by {{ post.user }}</p>
+      <button onclick="deleteDocument({{ post.pk }})">Delete</button>
+    </li>
+  {% endfor %}
+</ul>
+</body>
+
+<script>
+async function deleteDocument(pk) {
+    if (!confirm("Are you sure you remove this hold?")) return;
+    try {
+        const response = await fetch(`/${pk}/delete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+        });
+        const data = await response.json();
+        if (data.success) {
+            const liElement = document.querySelector(`li:has(button[onclick="deleteDocument(${pk})"])`);
+            liElement.remove();
+        } else {
+            alert('Failed to delete');
+        }
+    } catch (error) {
+        alert('error');
+    }
+}
+</script>
+{% endif %}
+{% endblock %}

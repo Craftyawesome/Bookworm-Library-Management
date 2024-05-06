@@ -3,6 +3,12 @@ from .models import Book, Book_Request, CartItem
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import timedelta
+from django.views.generic import ListView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from .forms import DocumentForm
+import os
+from django.views.decorators.http import require_POST
 # Create your views here.
 
 # HomeScreenView
@@ -79,3 +85,25 @@ def request_book(request):
 
 def book_request(request):
     return render(request,'book_request.html')
+
+class BookCheckoutView(LoginRequiredMixin, CreateView, ListView):
+    model = CartItem
+    template_name = "book_checkout.html"
+    form_class = DocumentForm
+    success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+@require_POST
+def delete_document(request, pk):
+    try:
+        document = CartItem.objects.get(pk=pk)
+        if request.user.is_staff or document.user == request.user:
+            document.delete()
+            return JsonResponse({'success': True})
+    except CartItem.DoesNotExist:
+        pass
+    return JsonResponse({'success': False})
