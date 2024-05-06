@@ -67,28 +67,26 @@
 
 <header class="header">
     <h1>Bookworm</h1>
-    <p>Welcome to Bookworm, Check out available books. Dont see one you want to read request a book. Upload a file to be printed. </p>
+    <p>Welcome to Bookworm! Using this software, you can rent, request, and hold books. You can also upload files for library staff to print for you. </p>
     <h2>
         <a href="{% url 'home' %}">Home</a>
         <a>|</a>
         <a href="{% url 'book_list' %}">Search Books</a>
         <a>|</a>
-        <a href="{% url 'book_club' %}">Join a BookClub</a>
-        <a>|</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'print' %}">Print Requests</a>
+            <a href="{% url 'print' %}">Print Upload</a>
             <a>|</a>
-            <a href="{% url 'book_checkout_list' %}">Check-Out</a>
+            <a href="{% url 'book_checkout_list' %}">Checkout</a>
             <a>|</a>
             <form method="post" style="display: inline-block;" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button type="submit" class="link-button">Logout</button>
+                <button type="submit" class="link-button">Log Out</button>
             </form>
 
         {% else %}
             <a href="{% url 'signup' %}">Sign Up</a>
             <a>|</a>
-            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'login' %}">Log In</a>
         {% endif %}
     </h2>
 </header>
@@ -100,7 +98,7 @@
 </body>
 
 <footer>
-    <p4>BookWorm Library Management System 2024</p4>
+    <p4>Bookworm Library Management System (2024)</p4>
 </footer>
 
 

@@ -20,7 +20,7 @@
 
 <script>
 async function deleteDocument(pk) {
-    if (!confirm("Are you sure you remove this hold?")) return;
+    if (!confirm("Are you sure you want to remove this item?")) return;
     try {
         const response = await fetch(`/${pk}/delete/`, {
             method: 'POST',
@@ -33,7 +33,7 @@ async function deleteDocument(pk) {
             const liElement = document.querySelector(`li:has(button[onclick="deleteDocument(${pk})"])`);
             liElement.remove();
         } else {
-            alert('Failed to delete');
+            alert('Failed to remove item');
         }
     } catch (error) {
         alert('error');

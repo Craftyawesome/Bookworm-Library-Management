@@ -66,10 +66,6 @@ def getBook_Request(request):
             
     return JsonResponse({"requests":list(requests.values())})
 
-def book_club(request):
-    return render(request,'book_club.html')
-
-
 def add_to_cart(request):
     if request.method == 'POST':
         book_isbn = request.POST.get('book_isbn')
