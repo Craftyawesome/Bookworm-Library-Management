@@ -11,7 +11,7 @@
       <li style="margin-bottom: 20px;">
         <h3>{{ post.book }}</h3>
         <p style="margin: 0;">Requested by {{ post.user }}</p>
-        <button onclick="deleteDocument({{ post.pk }})">Delete</button>
+        <button onclick="deleteDocument({{ post.pk }})">Remove Hold</button>
       </li>
     {% endif %}
   {% endfor %}
