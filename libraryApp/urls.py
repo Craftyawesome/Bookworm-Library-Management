@@ -1,6 +1,6 @@
 from django.urls import path 
 
-from .views import home, book_list, requested_books, getBook_Request, book_detail, add_to_cart, request_book,book_club, BookCheckoutView, delete_document
+from .views import home, book_list, requested_books, getBook_Request, book_detail, add_to_cart, request_book, BookCheckoutView, delete_document
 
 from django.contrib.auth import views as auth_views
 from . import views
@@ -8,7 +8,6 @@ from . import views
 urlpatterns = [
     path('', home, name='home'),
     path('book_list/', book_list, name='book_list'),
-    path('book_club/', book_club, name='book_club'),
     path("logout/", auth_views.LogoutView.as_view()),
     path('requested_books/',requested_books, name='requested_books'),
     path('book_detail/',book_detail, name='book_detail'),
