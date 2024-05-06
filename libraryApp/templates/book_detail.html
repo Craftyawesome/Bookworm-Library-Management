@@ -17,13 +17,14 @@
     </ul>
 
 
-<p>Request Book To Take Home</p>
+<p>Request Book To Take Home:</p>
 
 <form action="{% url 'add_to_cart' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="book_isbn" value="{{ book_details.ISBN }}">
-    <button type="submit">Add to Cart</button>
-  </form>
+    <button type="submit">Request Book</button>
+</form>
+<p></p>
 </body>
 {% endblock %}
 </html>
